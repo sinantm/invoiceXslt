@@ -1,0 +1,38 @@
+[
+    {
+        "type": "I",
+        "title": "TEMA I",
+        "description": "1",
+        "path": "templates/Invoice/I/"
+    },
+    {
+        "type": "II",
+        "title": "TEMA II",
+        "description": "2",
+        "path": "templates/Invoice/II/"
+    },
+    {
+        "type": "III",
+        "title": "TEMA III",
+        "description": "3",
+        "path": "templates/Invoice/III/"
+    },
+    {
+        "type": "IV",
+        "title": "TEMA IV",
+        "description": "4",
+        "path": "templates/Invoice/IV/"
+    },
+    {
+        "type": "V",
+        "title": "TEMA V",
+        "description": "5",
+        "path": "templates/Invoice/V/"
+    },
+    {
+        "type": "VI",
+        "title": "TEMA VI",
+        "description": "6",
+        "path": "templates/Invoice/VI/"
+    }
+]
