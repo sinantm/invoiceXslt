@@ -2,9 +2,9 @@ import { DocumentNotesModel } from '../../common/models';
 
 export const initialState: NotesState = {
   notes: {
-    firstNote: '',
-    secondNote: '',
-    thirdNote: ''
+    firstNote: '1',
+    secondNote: '2',
+    thirdNote: '3'
   }
 };
 

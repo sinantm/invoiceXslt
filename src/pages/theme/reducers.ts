@@ -9,15 +9,9 @@ const reducer: Reducer<TemplateSelectorState> = (state = initialState, action) =
         selected: action.payload
       };
     }
-    case TemplateSelectorActionTypes.SET_PRODUCT: {
-      return {
-        ...state,
-        selectedProduct: action.payload
-      };
-    }
     default:
       return state;
   }
 };
-
+ 
 export default reducer;

@@ -3,6 +3,7 @@ import themeReducers from './pages/theme/reducers'
 import notesReducers from './pages/notes/reducers'
 import companyInfoReducers from './pages/companyInfo/reducers'
 import bankInfoReducers from './pages/bankInfo/reducers'
+import locationInfoReducers from './pages/layout/reducers'
 // ...
 
 export const store: any = configureStore({
@@ -10,7 +11,8 @@ export const store: any = configureStore({
     theme: themeReducers,
     notes: notesReducers,
     companyInfo: companyInfoReducers,
-    bankInfo: bankInfoReducers
+    bankInfo: bankInfoReducers,
+    locationInfo: locationInfoReducers
   },
 })
 

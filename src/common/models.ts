@@ -20,6 +20,10 @@ export interface GenericParameter<T> {
     mail: string;
     webSite: string;
   }
+
+  export interface LocationModel {
+    selectedKeys: string;
+  }
   
   export interface DocumentNotesModel {
     firstNote: string;
