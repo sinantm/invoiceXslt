@@ -5,14 +5,15 @@ import { TemplateModel } from "../../common/models";
 import { setSelectedTemplate } from "./actions";
 import ThemeList from "../../themeList.json";
 import ThemeCard from "../../components/ThemeCard";
+import Toastifys from "../../components/Toastify";
 
 interface IPropsFromDispatch {
   setSelectedTemplate: typeof setSelectedTemplate;
 }
 
 function readTextFile(path: string) {
-  var allText = "";
-  var rawFile = new XMLHttpRequest();
+  let allText = "";
+  let rawFile = new XMLHttpRequest();
   rawFile.open("GET", path, false);
   rawFile.onreadystatechange = function () {
     if (rawFile.readyState === 4) {
@@ -27,19 +28,25 @@ function readTextFile(path: string) {
 
 const Theme = (props: IPropsFromDispatch) => {
   const onSelectedInvoice = (path: string) => {
-    var htmlPath = path + "default.html";
-    var textHtml = readTextFile(htmlPath);
+    const htmlPath = path + "default.html";
+    const textHtml = readTextFile(htmlPath);
 
-    var xsltEinvoicePath = path + "einvoice.xslt";
-    var textXsltEinvoice = readTextFile(xsltEinvoicePath);
+    const xsltEinvoicePath = path + "einvoice.xslt";
+    const textXsltEinvoice = readTextFile(xsltEinvoicePath);
 
-    var xsltEarchivePath = path + "earchive.xslt";
-    var textXsltEarchive = readTextFile(xsltEarchivePath);
+    const xsltEarchivePath = path + "earchive.xslt";
+    const textXsltEarchive = readTextFile(xsltEarchivePath);
 
     props.setSelectedTemplate({
       HtmlTemplate: textHtml,
       EinvoiceTemplate: textXsltEinvoice,
       EarchiveTemplate: textXsltEarchive,
+    });
+
+    Toastifys({
+      title: `Tema Başarı İle Seçildi.`,
+      type: "info",
+      position: "top-right",
     });
   };
 
@@ -55,7 +62,7 @@ const Theme = (props: IPropsFromDispatch) => {
                 type={item.type}
                 image={item.path + "default.jpg"}
                 title={item.title}
-                onClick={onSelectedInvoice(item.path)}
+                onClick={() => onSelectedInvoice(item.path)}
               />
             </List.Item>
           )}

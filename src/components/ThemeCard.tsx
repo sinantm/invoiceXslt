@@ -3,7 +3,7 @@ import Meta from "antd/lib/card/Meta";
 import React, { PureComponent } from "react";
 
 interface IProps {
-  onClick: Function | any;
+  onClick: () => void;
   type: string;
   image: string;
   title: string;
