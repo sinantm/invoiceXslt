@@ -23,6 +23,14 @@ export interface GenericParameter<T> {
 
   export interface LocationModel {
     selectedKeys: string;
+    disabledPage: {
+      theme: boolean;
+      companyinfo: boolean;
+      logo: boolean;
+      signature: boolean;
+      bankinfo: boolean;
+      notes: boolean;
+    }
   }
   
   export interface DocumentNotesModel {
@@ -30,10 +38,15 @@ export interface GenericParameter<T> {
     secondNote: string;
     thirdNote: string;
   }
+
+  export interface CropperStateModel {
+    src?: any;
+    cropResult?: any;
+    refresh?: boolean;
+  }
   
   export interface LogoModel {
     logoBase64: string;
-    signatureBase64: string;
   }
   
   export interface SignatureModel {

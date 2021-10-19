@@ -2,7 +2,15 @@ import { LocationModel } from '../../common/models';
 
 export const initialState: LocationInfoState = {
   info: {
-    selectedKeys: '1'
+    selectedKeys: '1',
+    disabledPage: {
+      theme: false,
+      companyinfo: true,
+      logo: true,
+      signature: true,
+      bankinfo: true,
+      notes: true
+    }
   }
 };
 

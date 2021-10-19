@@ -4,6 +4,7 @@ import notesReducers from './pages/notes/reducers'
 import companyInfoReducers from './pages/companyInfo/reducers'
 import bankInfoReducers from './pages/bankInfo/reducers'
 import locationInfoReducers from './pages/layout/reducers'
+import logoReducers from './pages/Logo/reducers'
 // ...
 
 export const store: any = configureStore({
@@ -12,7 +13,8 @@ export const store: any = configureStore({
     notes: notesReducers,
     companyInfo: companyInfoReducers,
     bankInfo: bankInfoReducers,
-    locationInfo: locationInfoReducers
+    locationInfo: locationInfoReducers,
+    logo: logoReducers
   },
 })
 

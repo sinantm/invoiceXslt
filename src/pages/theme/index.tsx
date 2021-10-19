@@ -1,14 +1,17 @@
 import { List, Row } from "antd";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { TemplateModel } from "../../common/models";
+import { LocationModel, TemplateModel } from "../../common/models";
 import { setSelectedTemplate } from "./actions";
 import ThemeList from "../../themeList.json";
 import ThemeCard from "../../components/ThemeCard";
 import Toastifys from "../../components/Toastify";
+import { updateLocationInfo } from "../layout/actions";
+import { useHistory } from "react-router-dom";
 
-interface IPropsFromDispatch {
+interface IProps {
   setSelectedTemplate: typeof setSelectedTemplate;
+  updateLocationInfo: typeof updateLocationInfo;
 }
 
 function readTextFile(path: string) {
@@ -26,7 +29,9 @@ function readTextFile(path: string) {
   return allText;
 }
 
-const Theme = (props: IPropsFromDispatch) => {
+const Theme = (props: IProps) => {
+  let history = useHistory();
+
   const onSelectedInvoice = (path: string) => {
     const htmlPath = path + "default.html";
     const textHtml = readTextFile(htmlPath);
@@ -42,6 +47,19 @@ const Theme = (props: IPropsFromDispatch) => {
       EinvoiceTemplate: textXsltEinvoice,
       EarchiveTemplate: textXsltEarchive,
     });
+
+    props.updateLocationInfo({
+      selectedKeys: "2",
+      disabledPage: {
+        theme: true,
+        companyinfo: false,
+        logo: true,
+        signature: true,
+        bankinfo: true,
+        notes: true,
+      },
+    });
+    history.push("/companyinfo");
 
     Toastifys({
       title: `Tema Başarı İle Seçildi.`,
@@ -75,6 +93,8 @@ const Theme = (props: IPropsFromDispatch) => {
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setSelectedTemplate: (params: TemplateModel) =>
     dispatch(setSelectedTemplate(params)),
+  updateLocationInfo: (params: LocationModel) =>
+    dispatch(updateLocationInfo(params)),
 });
 
 export default connect(null, mapDispatchToProps)(Theme);
