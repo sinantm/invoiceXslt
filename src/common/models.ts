@@ -50,12 +50,7 @@ export interface GenericParameter<T> {
   }
   
   export interface SignatureModel {
-    signatureSrc: string;
-    signatureCrop: object | any;
-    signatureZoom: number;
-    signatureAspect: number;
-    signatureCroppedAreaPixels: any;
-    signatureCroppedImage: any;
+    signatureBase64: string;
   }
   
   export interface BankInfoModel {
