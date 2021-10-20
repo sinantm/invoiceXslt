@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { LocationModel, LogoModel, SignatureModel } from "../../common/models";
+import Toastifys from "../../components/Toastify";
 import { updateLocationInfo } from "../layout/actions";
 import { signatureOnCrop } from "./actions";
 import "./style.css";
@@ -62,10 +63,17 @@ const SignatureCropper = (props: IProps) => {
         signature: true,
         bankinfo: false,
         notes: true,
+        home: true,
       },
     });
 
     history.push("/bankinfo");
+
+    Toastifys({
+      title: `İmza Başarı İle Eklendi.`,
+      type: "info",
+      position: "top-right",
+    });
   };
 
   const back = () => {
@@ -78,6 +86,7 @@ const SignatureCropper = (props: IProps) => {
         signature: true,
         bankinfo: true,
         notes: true,
+        home: true,
       },
     });
     history.push("/logo");
@@ -89,6 +98,18 @@ const SignatureCropper = (props: IProps) => {
         (stateSrc !== undefined &&
           props.croped.signatureBase64 === undefined)) && (
         <div>
+          {stateCrop !== "" && (
+            <Row>
+              <Col span={24} style={{ marginBottom: 10 }}>
+                <Button type="primary" danger onClick={back}>
+                  Geri
+                </Button>{" "}
+                <Button type="primary" onClick={next}>
+                  İleri
+                </Button>
+              </Col>
+            </Row>
+          )}
           <Row>
             <Col span={18}>
               <ReactCropper
@@ -142,15 +163,6 @@ const SignatureCropper = (props: IProps) => {
               </Col>
             </Row>
           )}
-
-          <div style={{ marginTop: 10, marginBottom: 10 }}>
-            <Button type="primary" danger onClick={back}>
-              Geri
-            </Button>{" "}
-            <Button type="primary" onClick={next}>
-              İleri
-            </Button>
-          </div>
 
           <Alert
             style={{ marginBottom: "10px" }}

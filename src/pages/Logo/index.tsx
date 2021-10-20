@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { LocationModel, LogoModel } from "../../common/models";
+import Toastifys from "../../components/Toastify";
 import { updateLocationInfo } from "../layout/actions";
 import { logoOnCrop } from "./actions";
 import "./style.css";
@@ -62,10 +63,17 @@ const LogoCropper = (props: IProps) => {
         signature: false,
         bankinfo: true,
         notes: true,
+        home: true,
       },
     });
 
     history.push("/signature");
+
+    Toastifys({
+      title: `Logo Başarı İle Eklendi.`,
+      type: "info",
+      position: "top-right",
+    });
   };
 
   const back = () => {
@@ -78,6 +86,7 @@ const LogoCropper = (props: IProps) => {
         signature: true,
         bankinfo: true,
         notes: true,
+        home: true,
       },
     });
     history.push("/companyinfo");
@@ -88,6 +97,18 @@ const LogoCropper = (props: IProps) => {
       {(stateRefresh === true ||
         (stateSrc !== undefined && props.croped.logoBase64 === undefined)) && (
         <div>
+          {stateCrop !== "" && (
+            <Row>
+              <Col span={24} style={{ marginBottom: 10 }}>
+                <Button type="primary" danger onClick={back}>
+                  Geri
+                </Button>{" "}
+                <Button type="primary" onClick={next}>
+                  İleri
+                </Button>
+              </Col>
+            </Row>
+          )}
           <Row>
             <Col span={18}>
               <ReactCropper
@@ -143,15 +164,6 @@ const LogoCropper = (props: IProps) => {
             </Row>
           )}
 
-          <div style={{ marginTop: 10, marginBottom: 10 }}>
-            <Button type="primary" danger onClick={back}>
-              Geri
-            </Button>{" "}
-            <Button type="primary" onClick={next}>
-              İleri
-            </Button>
-          </div>
-
           <Alert
             style={{ marginBottom: "10px" }}
             message="Yukarıdaki döndürme alanını kullanarak resimi çevirebilirsiniz."
@@ -195,13 +207,6 @@ const LogoCropper = (props: IProps) => {
             message="Logo seçiniz"
             description="Fatura tasarımlarınızda görünmesini istediğiniz logoyu seçebilirsiniz."
             type="info"
-            showIcon
-          />
-
-          <Alert
-            style={{ marginBottom: "10px" }}
-            message="Logo zorunlu olmadığı için dilerseniz bu adımı atlayabilirsiniz"
-            type="warning"
             showIcon
           />
         </React.Fragment>

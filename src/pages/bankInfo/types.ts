@@ -1,7 +1,7 @@
 import { BankInfoModel } from '../../common/models';
 
 export const initialState: BankInfoState = {
-  list: [{bankName:'akbank',branch:'kadıköy',branchCode:'2253',accountCode:'111',accountType:'TL',accountName:'AHMET ÖZCAN',iban:'TRDFGDFGFDGFD'}]
+  list: []
 };
 
 export interface BankInfoStateType {

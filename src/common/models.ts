@@ -30,6 +30,7 @@ export interface GenericParameter<T> {
       signature: boolean;
       bankinfo: boolean;
       notes: boolean;
+      home: boolean;
     }
   }
   

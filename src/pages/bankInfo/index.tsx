@@ -1,4 +1,13 @@
 import {
+  faUser,
+  faPiggyBank,
+  faCodeBranch,
+  faSortNumericDown,
+  faTrash,
+  faMoneyCheck,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   Avatar,
   Button,
   Col,
@@ -10,10 +19,13 @@ import {
   Table,
 } from "antd";
 import "antd/lib/timeline/style/index.css";
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
-import { BankInfoModel } from "../../common/models";
+import { BankInfoModel, LocationModel } from "../../common/models";
+import Toastifys from "../../components/Toastify";
+import { updateLocationInfo } from "../layout/actions";
 import { deleteBankInfo, updateBankInfo } from "./actions";
 import Arabia from "./CountryLogo/arabia.png";
 import Canada from "./CountryLogo/canada.png";
@@ -36,6 +48,7 @@ interface IProps {
 interface IPropsFromDispatch {
   updateBankInfo: typeof updateBankInfo;
   deleteBankInfo: typeof deleteBankInfo;
+  updateLocationInfo: typeof updateLocationInfo;
 }
 
 type AllProps = IProps & IPropsFromDispatch;
@@ -44,20 +57,11 @@ const { Option } = Select;
 
 const BankInfo = (props: AllProps) => {
   const [form] = Form.useForm();
+  let history = useHistory();
+
+  const [accounData, setaccounData] = useState<Array<BankInfoModel>>([]);
 
   const dataList = [
-    {
-      key: "operasyon",
-      render: (text: any, record: BankInfoModel) => (
-        <Popconfirm
-          title="Seçili Kayıt Silinecek?"
-          onConfirm={() => props.deleteBankInfo(record)}
-        >
-          {" "}
-          <span style={{ cursor: "pointer" }}>Sil</span>
-        </Popconfirm>
-      ),
-    },
     {
       key: "bankName",
       title: "Banka Adı",
@@ -95,19 +99,83 @@ const BankInfo = (props: AllProps) => {
       key: "accountName",
       width: 200,
     },
+    {
+      key: "operasyon",
+      render: (text: any, record: BankInfoModel) => (
+        <Popconfirm
+          title="Seçili Kayıt Silinecek?"
+          onConfirm={() => props.deleteBankInfo(record)}
+        >
+          <div style={{ cursor: "pointer" }}>
+            <FontAwesomeIcon style={{ color: "#ff2a00" }} icon={faTrash} />{" "}
+            <span>Sil</span>
+          </div>
+        </Popconfirm>
+      ),
+    },
   ];
 
-  const addBankInfo = () => {
+  const addItemAccount = () => {
     form.validateFields().then((x) => {
       const values: BankInfoModel = form.getFieldsValue();
-
-      console.log(`values`, values);
+      setaccounData([...accounData, values]);
       props.updateBankInfo(values);
     });
   };
 
+  const next = () => {
+    props.updateLocationInfo({
+      selectedKeys: "6",
+      disabledPage: {
+        theme: true,
+        companyinfo: true,
+        logo: true,
+        signature: true,
+        bankinfo: true,
+        notes: false,
+        home: true,
+      },
+    });
+
+    history.push("/notes");
+
+    if (accounData.length !== 0) {
+      Toastifys({
+        title: `Banka Bilgileri Başarı İle Eklendi.`,
+        type: "info",
+        position: "top-right",
+      });
+    }
+  };
+
+  const back = () => {
+    props.updateLocationInfo({
+      selectedKeys: "4",
+      disabledPage: {
+        theme: true,
+        companyinfo: true,
+        logo: true,
+        signature: false,
+        bankinfo: true,
+        notes: true,
+        home: true,
+      },
+    });
+    history.push("/signature");
+  };
+
   return (
     <React.Fragment>
+      <Row>
+        <Col span={24} style={{ marginBottom: 10, marginTop: 10 }}>
+          <Button type="primary" danger onClick={back}>
+            Geri
+          </Button>{" "}
+          <Button type="primary" onClick={next}>
+            İleri
+          </Button>
+        </Col>
+      </Row>
       <Form form={form} className="login-form">
         <Row gutter={16}>
           <Col span={8}>
@@ -119,7 +187,15 @@ const BankInfo = (props: AllProps) => {
               ]}
               hasFeedback
             >
-              <Input prefix={"icon"} placeholder="Banka Adı" />
+              <Input
+                prefix={
+                  <FontAwesomeIcon
+                    style={{ color: "#ced4da" }}
+                    icon={faPiggyBank}
+                  />
+                }
+                placeholder="Banka Adı"
+              />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -129,7 +205,15 @@ const BankInfo = (props: AllProps) => {
               rules={[{ required: false }]}
               hasFeedback
             >
-              <Input prefix={"icon"} placeholder="Şube" />
+              <Input
+                prefix={
+                  <FontAwesomeIcon
+                    style={{ color: "#ced4da" }}
+                    icon={faCodeBranch}
+                  />
+                }
+                placeholder="Şube"
+              />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -139,7 +223,15 @@ const BankInfo = (props: AllProps) => {
               rules={[{ required: false }]}
               hasFeedback
             >
-              <Input prefix={"icon"} placeholder="Şube Kodu" />
+              <Input
+                prefix={
+                  <FontAwesomeIcon
+                    style={{ color: "#ced4da" }}
+                    icon={faCodeBranch}
+                  />
+                }
+                placeholder="Şube Kodu"
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -151,7 +243,15 @@ const BankInfo = (props: AllProps) => {
               rules={[{ required: false }]}
               hasFeedback
             >
-              <Input prefix={"icon"} placeholder="Hesap No" />
+              <Input
+                prefix={
+                  <FontAwesomeIcon
+                    style={{ color: "#ced4da" }}
+                    icon={faSortNumericDown}
+                  />
+                }
+                placeholder="Hesap No"
+              />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -225,7 +325,15 @@ const BankInfo = (props: AllProps) => {
               ]}
               hasFeedback
             >
-              <Input prefix={"icon"} placeholder="IBAN" />
+              <Input
+                prefix={
+                  <FontAwesomeIcon
+                    style={{ color: "#ced4da" }}
+                    icon={faMoneyCheck}
+                  />
+                }
+                placeholder="IBAN"
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -237,22 +345,27 @@ const BankInfo = (props: AllProps) => {
               rules={[{ required: false }]}
               hasFeedback
             >
-              <Input prefix={"icon"} placeholder="Hesap Adı" />
+              <Input
+                prefix={
+                  <FontAwesomeIcon style={{ color: "#ced4da" }} icon={faUser} />
+                }
+                placeholder="Hesap Adı"
+              />
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item>
+        <Form.Item style={{ textAlign: "right" }}>
           <Button
             type="primary"
             htmlType="submit"
             className="login-form-button"
-            onClick={addBankInfo}
+            onClick={addItemAccount}
           >
             Ekle
           </Button>
         </Form.Item>
       </Form>
-      <Table columns={dataList} pagination={false} dataSource={props.list} />
+      <Table columns={dataList} pagination={false} dataSource={accounData} />
     </React.Fragment>
   );
 };
@@ -264,6 +377,8 @@ const mapStateToProps = ({ bankInfo }: BankInfoStateType) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   updateBankInfo: (params: BankInfoModel) => dispatch(updateBankInfo(params)),
   deleteBankInfo: (params: BankInfoModel) => dispatch(deleteBankInfo(params)),
+  updateLocationInfo: (params: LocationModel) =>
+    dispatch(updateLocationInfo(params)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BankInfo);

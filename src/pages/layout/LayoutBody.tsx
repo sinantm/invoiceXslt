@@ -6,6 +6,7 @@ import CompanyInfo from "../companyInfo";
 import Notes from "../notes";
 import Logo from "../Logo";
 import Signature from "../signature";
+import HomePage from "../home";
 import "./style.css";
 import { Switch, Route, Link } from "react-router-dom";
 import { LocationModel } from "../../common/models";
@@ -50,6 +51,9 @@ const LayoutBody = (props: IProps) => {
           <Menu.Item disabled={menuDisabled.notes} key="6">
             <Link to="/notes">Notlar</Link>
           </Menu.Item>
+          <Menu.Item disabled={menuDisabled.home} key="7">
+            <Link to="/home">Anasayfa</Link>
+          </Menu.Item>
         </Menu>
       </Header>
       <Content
@@ -64,6 +68,7 @@ const LayoutBody = (props: IProps) => {
           <Route exact path="/signature" component={Signature} />
           <Route exact path="/bankinfo" component={BankInfo} />
           <Route exact path="/notes" component={Notes} />
+          <Route exact path="/home" component={HomePage} />
         </Switch>
       </Content>
       <Footer style={{ textAlign: "center" }}>

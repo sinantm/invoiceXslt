@@ -9,7 +9,8 @@ export const initialState: LocationInfoState = {
       logo: true,
       signature: true,
       bankinfo: true,
-      notes: true
+      notes: true,
+      home:true
     }
   }
 };

@@ -57,6 +57,7 @@ const Theme = (props: IProps) => {
         signature: true,
         bankinfo: true,
         notes: true,
+        home: true,
       },
     });
     history.push("/companyinfo");

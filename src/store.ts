@@ -11,7 +11,7 @@ import signatureReducers from './pages/signature/reducers'
 export const store: any = configureStore({
   reducer: {
     theme: themeReducers,
-    notes: notesReducers,
+    documentNotes: notesReducers,
     companyInfo: companyInfoReducers,
     bankInfo: bankInfoReducers,
     locationInfo: locationInfoReducers,

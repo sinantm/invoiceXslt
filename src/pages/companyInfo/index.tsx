@@ -23,6 +23,7 @@ import { useHistory } from "react-router-dom";
 import { CompanyInfoStateType } from "./types";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Toastifys from "../../components/Toastify";
 
 interface IPropsFromDispatch {
   updateCompanyInfo: typeof updateCompanyInfo;
@@ -74,9 +75,16 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
           signature: true,
           bankinfo: true,
           notes: true,
+          home: true,
         },
       });
       history.push("/logo");
+
+      Toastifys({
+        title: `Firma Bilgileri Başarı İle Eklendi.`,
+        type: "info",
+        position: "top-right",
+      });
     });
   };
 
@@ -90,6 +98,7 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
         signature: true,
         bankinfo: true,
         notes: true,
+        home: true,
       },
     });
     history.push("/theme");
