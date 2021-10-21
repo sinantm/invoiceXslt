@@ -63,7 +63,7 @@ const LogoCropper = (props: IProps) => {
         signature: false,
         bankinfo: true,
         notes: true,
-        home: true,
+        invoicepreview: true,
       },
     });
 
@@ -86,7 +86,7 @@ const LogoCropper = (props: IProps) => {
         signature: true,
         bankinfo: true,
         notes: true,
-        home: true,
+        invoicepreview: true,
       },
     });
     history.push("/companyinfo");
@@ -94,21 +94,29 @@ const LogoCropper = (props: IProps) => {
 
   return (
     <div style={{ marginTop: 10 }}>
+      {props.croped.logoBase64 && (
+        <Row>
+          <Col span={24} style={{ marginBottom: 10 }}>
+            <Button type="primary" danger onClick={back}>
+              Geri Dön
+            </Button>{" "}
+            <Button type="primary" onClick={next}>
+              Devam Et
+            </Button>
+          </Col>
+          <Col span={24}>
+            <Alert
+              style={{ marginBottom: "10px" }}
+              message="Logonuzu Kırparak Seçtiniz. Yeniden Seçmek İsterseniz 'Dosya Seç' Butonuna Tıklayarak Seçebilirsiniz."
+              type="warning"
+              showIcon
+            />
+          </Col>
+        </Row>
+      )}
       {(stateRefresh === true ||
         (stateSrc !== undefined && props.croped.logoBase64 === undefined)) && (
         <div>
-          {stateCrop !== "" && (
-            <Row>
-              <Col span={24} style={{ marginBottom: 10 }}>
-                <Button type="primary" danger onClick={back}>
-                  Geri
-                </Button>{" "}
-                <Button type="primary" onClick={next}>
-                  İleri
-                </Button>
-              </Col>
-            </Row>
-          )}
           <Row>
             <Col span={18}>
               <ReactCropper

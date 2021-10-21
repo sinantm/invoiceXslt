@@ -10,7 +10,7 @@ export const initialState: LocationInfoState = {
       signature: true,
       bankinfo: true,
       notes: true,
-      home:true
+      invoicepreview:true
     }
   }
 };

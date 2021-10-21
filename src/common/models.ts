@@ -30,7 +30,7 @@ export interface GenericParameter<T> {
       signature: boolean;
       bankinfo: boolean;
       notes: boolean;
-      home: boolean;
+      invoicepreview: boolean;
     }
   }
   
@@ -69,6 +69,18 @@ export interface GenericParameter<T> {
     EinvoiceTemplate: string;
     EarchiveTemplate: string;
   }
+
+  export interface TemplateHtmlModel {
+    HtmlTemplate: string;
+  }
+
+  export interface TemplateEinvoiceModel {
+    EinvoiceTemplate: string;
+  }
+
+  export interface TemplateEarchiveModel {
+    EarchiveTemplate: string;
+  }
   
   export interface ProductModel {
     Product: boolean;
@@ -83,8 +95,9 @@ export interface GenericParameter<T> {
     companyInfo: StateModel;
     bankInfo: StateModel;
     documentNotes: StateModel;
-    logoAndSignature: LogoModel;
-    htmlPreview: HtmlPreviewModel;
+    logo: LogoModel;
+    signature: SignatureModel;
+    theme: HtmlPreviewModel;
   }
   
   export interface HtmlPreviewModel {

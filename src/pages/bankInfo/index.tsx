@@ -59,7 +59,9 @@ const BankInfo = (props: AllProps) => {
   const [form] = Form.useForm();
   let history = useHistory();
 
-  const [accounData, setaccounData] = useState<Array<BankInfoModel>>([]);
+  const [accounData, setaccounData] = useState<Array<BankInfoModel>>(
+    props.list
+  );
 
   const dataList = [
     {
@@ -133,7 +135,7 @@ const BankInfo = (props: AllProps) => {
         signature: true,
         bankinfo: true,
         notes: false,
-        home: true,
+        invoicepreview: true,
       },
     });
 
@@ -158,7 +160,7 @@ const BankInfo = (props: AllProps) => {
         signature: false,
         bankinfo: true,
         notes: true,
-        home: true,
+        invoicepreview: true,
       },
     });
     history.push("/signature");
@@ -169,10 +171,10 @@ const BankInfo = (props: AllProps) => {
       <Row>
         <Col span={24} style={{ marginBottom: 10, marginTop: 10 }}>
           <Button type="primary" danger onClick={back}>
-            Geri
+            Geri Dön
           </Button>{" "}
           <Button type="primary" onClick={next}>
-            İleri
+            Devam Et
           </Button>
         </Col>
       </Row>

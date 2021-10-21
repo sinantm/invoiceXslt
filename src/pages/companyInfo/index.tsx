@@ -64,7 +64,6 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
     form.validateFields().then((x) => {
       const values: CompanyInfoModel = form.getFieldsValue();
 
-      console.log(`values`, values);
       props.updateCompanyInfo(values);
       props.updateLocationInfo({
         selectedKeys: "3",
@@ -75,7 +74,7 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
           signature: true,
           bankinfo: true,
           notes: true,
-          home: true,
+          invoicepreview: true,
         },
       });
       history.push("/logo");
@@ -98,7 +97,7 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
         signature: true,
         bankinfo: true,
         notes: true,
-        home: true,
+        invoicepreview: true,
       },
     });
     history.push("/theme");
@@ -108,10 +107,10 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
     <div>
       <div style={{ marginTop: 10 }}>
         <Button type="primary" danger onClick={back}>
-          Geri
+          Geri Dön
         </Button>{" "}
         <Button type="primary" onClick={next}>
-          İleri
+          Devam Et
         </Button>
       </div>
       <Form form={form} style={{ marginTop: 10 }}>

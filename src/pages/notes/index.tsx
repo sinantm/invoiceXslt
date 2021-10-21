@@ -1,6 +1,6 @@
-import { Alert, Button, Col, Form, Input, message, Row } from "antd";
+import { Alert, Button, Col, Form, Input, Row } from "antd";
 import "antd/lib/timeline/style/index.css";
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
@@ -24,6 +24,7 @@ const Notes = (props: IProps) => {
   const next = () => {
     form.validateFields().then((x) => {
       const values: DocumentNotesModel = form.getFieldsValue();
+
       props.addDocumentNotes(values);
     });
 
@@ -36,11 +37,11 @@ const Notes = (props: IProps) => {
         signature: true,
         bankinfo: true,
         notes: true,
-        home: false,
+        invoicepreview: false,
       },
     });
 
-    history.push("/home");
+    history.push("/invoicepreview");
   };
 
   const back = () => {
@@ -53,10 +54,10 @@ const Notes = (props: IProps) => {
         signature: true,
         bankinfo: false,
         notes: true,
-        home: true,
+        invoicepreview: true,
       },
     });
-    history.push("/signature");
+    history.push("/bankinfo");
   };
 
   return (
@@ -64,10 +65,10 @@ const Notes = (props: IProps) => {
       <Row>
         <Col span={24} style={{ marginBottom: 10, marginTop: 10 }}>
           <Button type="primary" danger onClick={back}>
-            Geri
+            Geri Dön
           </Button>{" "}
           <Button type="primary" onClick={next}>
-            İleri
+            Devam Et
           </Button>
         </Col>
       </Row>
@@ -82,7 +83,6 @@ const Notes = (props: IProps) => {
           />
           <Form form={form}>
             <Form.Item
-              initialValue={props.notes.firstNote}
               name={"firstNote"}
               rules={[{ required: false }]}
               hasFeedback
@@ -94,7 +94,6 @@ const Notes = (props: IProps) => {
               />
             </Form.Item>
             <Form.Item
-              initialValue={props.notes.secondNote}
               name={"secondNote"}
               rules={[{ required: false }]}
               hasFeedback
@@ -107,7 +106,6 @@ const Notes = (props: IProps) => {
               />
             </Form.Item>
             <Form.Item
-              initialValue={props.notes.thirdNote}
               name={"thirdNote"}
               rules={[{ required: false }]}
               hasFeedback

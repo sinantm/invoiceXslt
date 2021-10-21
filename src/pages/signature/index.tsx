@@ -63,7 +63,7 @@ const SignatureCropper = (props: IProps) => {
         signature: true,
         bankinfo: false,
         notes: true,
-        home: true,
+        invoicepreview: true,
       },
     });
 
@@ -86,7 +86,7 @@ const SignatureCropper = (props: IProps) => {
         signature: true,
         bankinfo: true,
         notes: true,
-        home: true,
+        invoicepreview: true,
       },
     });
     history.push("/logo");
@@ -94,22 +94,30 @@ const SignatureCropper = (props: IProps) => {
 
   return (
     <div style={{ marginTop: 10 }}>
+      {props.croped.signatureBase64 && (
+        <Row>
+          <Col span={24} style={{ marginBottom: 10 }}>
+            <Button type="primary" danger onClick={back}>
+              Geri Dön
+            </Button>{" "}
+            <Button type="primary" onClick={next}>
+              Devam Et
+            </Button>
+          </Col>
+          <Col span={24}>
+            <Alert
+              style={{ marginBottom: "10px" }}
+              message="İmzanızı Kırparak Seçtiniz. Yeniden Seçmek İsterseniz 'Dosya Seç' Butonuna Tıklayarak Seçebilirsiniz."
+              type="warning"
+              showIcon
+            />
+          </Col>
+        </Row>
+      )}
       {(stateRefresh === true ||
         (stateSrc !== undefined &&
           props.croped.signatureBase64 === undefined)) && (
         <div>
-          {stateCrop !== "" && (
-            <Row>
-              <Col span={24} style={{ marginBottom: 10 }}>
-                <Button type="primary" danger onClick={back}>
-                  Geri
-                </Button>{" "}
-                <Button type="primary" onClick={next}>
-                  İleri
-                </Button>
-              </Col>
-            </Row>
-          )}
           <Row>
             <Col span={18}>
               <ReactCropper
