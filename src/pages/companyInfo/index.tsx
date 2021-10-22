@@ -12,7 +12,7 @@ import {
   faPhoneVolume,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { Alert, Button, Col, Form, Input, Row, Select } from "antd";
+import { Alert, Col, Form, Input, Row, Select } from "antd";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { countryOption } from "../../common/countryOption";
@@ -24,14 +24,15 @@ import { CompanyInfoStateType } from "./types";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Toastifys from "../../components/Toastify";
+import NextOrBack from "../../components/NextOrBack";
 
-interface IPropsFromDispatch {
+interface IProps {
   updateCompanyInfo: typeof updateCompanyInfo;
   updateLocationInfo: typeof updateLocationInfo;
   companyInfo: CompanyInfoModel;
 }
 
-const CompanyInfo = (props: IPropsFromDispatch) => {
+const CompanyInfo = (props: IProps) => {
   const [form] = Form.useForm();
   let history = useHistory();
 
@@ -65,6 +66,7 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
       const values: CompanyInfoModel = form.getFieldsValue();
 
       props.updateCompanyInfo(values);
+
       props.updateLocationInfo({
         selectedKeys: "3",
         disabledPage: {
@@ -105,14 +107,7 @@ const CompanyInfo = (props: IPropsFromDispatch) => {
 
   return (
     <div>
-      <div style={{ marginTop: 10 }}>
-        <Button type="primary" danger onClick={back}>
-          Geri Dön
-        </Button>{" "}
-        <Button type="primary" onClick={next}>
-          Devam Et
-        </Button>
-      </div>
+      <NextOrBack next={next} back={back} />
       <Form form={form} style={{ marginTop: 10 }}>
         <Row>
           <Col style={{ marginBottom: 10, textAlign: "center" }}>

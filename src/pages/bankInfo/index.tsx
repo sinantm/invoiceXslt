@@ -24,6 +24,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { BankInfoModel, LocationModel } from "../../common/models";
+import NextOrBack from "../../components/NextOrBack";
 import Toastifys from "../../components/Toastify";
 import { updateLocationInfo } from "../layout/actions";
 import { deleteBankInfo, updateBankInfo } from "./actions";
@@ -168,16 +169,7 @@ const BankInfo = (props: AllProps) => {
 
   return (
     <React.Fragment>
-      <Row>
-        <Col span={24} style={{ marginBottom: 10, marginTop: 10 }}>
-          <Button type="primary" danger onClick={back}>
-            Geri Dön
-          </Button>{" "}
-          <Button type="primary" onClick={next}>
-            Devam Et
-          </Button>
-        </Col>
-      </Row>
+      <NextOrBack next={next} back={back} />
       <Form form={form} className="login-form">
         <Row gutter={16}>
           <Col span={8}>
